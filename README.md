@@ -2,13 +2,16 @@
 
 Environment: Ubuntu 22.04, ROS 2 Humble.
 
-Component repositories are imported into src/ using vcstool.
-Commit component code changes in their respective repositories.
+Component repositories are imported into src/ using vcstool. Commit component code changes in their respective repositories.
 
-risl.repos tracks development branches.
-risl.lock.repos records a source snapshot.
+risl.repos tracks development branches; risl.lock.repos records a source snapshot.
 
-Validation status: clean build and hardware checks pending.
+Current repositories represented:
+- https://github.com/MaxlGao/RISL_vention_ros
+- https://github.com/MaxlGao/RISL_onrobot_ros
+- https://github.com/MaxlGao/RISL_camera_msgs
+- https://github.com/MaxlGao/RISL_ur
+- https://github.com/MaxlGao/RISL_camera_localizer
 
 To checkout:
 ```
