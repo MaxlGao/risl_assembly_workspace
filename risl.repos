@@ -23,3 +23,8 @@ repositories:
     type: git
     url: https://github.com/MaxlGao/RISL_vention_ros.git
     version: main
+
+  risl_simulation:
+    type: git
+    url: https://github.com/MaxlGao/RISL_simulation.git
+    version: main
