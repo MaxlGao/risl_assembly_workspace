@@ -1,0 +1,21 @@
+repositories:
+  risl_camera_localizer:
+    type: git
+    url: https://github.com/MaxlGao/RISL_camera_localizer.git
+    version: 6e86ce0f6020ff3633e2b92e6a02fc8957be0786
+  risl_camera_msgs:
+    type: git
+    url: https://github.com/MaxlGao/RISL_camera_msgs.git
+    version: 91cc701ec916fdebc6f2a2ff18f11ff4928e78c2
+  risl_onrobot_ros:
+    type: git
+    url: https://github.com/MaxlGao/RISL_onrobot_ros.git
+    version: a89e0b8a27db28f19bac22e3fb417dad13775a70
+  risl_ur:
+    type: git
+    url: https://github.com/MaxlGao/RISL_ur.git
+    version: 22c322e2384b7e74541f0c641d51404c38f2fe4e
+  risl_vention_ros:
+    type: git
+    url: https://github.com/MaxlGao/RISL_vention_ros.git
+    version: 8fb844c45ef85b0bf31a5e2dfecdeefccd937137

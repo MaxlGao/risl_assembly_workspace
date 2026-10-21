@@ -1,0 +1,11 @@
+# Component repos independent
+/src/
+
+# ROS files
+/build/
+/install/
+/log/
+
+# Python
+__pycache__/
+*.py[cod]

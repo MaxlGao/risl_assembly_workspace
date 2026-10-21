@@ -1,0 +1,5 @@
+{
+  "git.autoRepositoryDetection": "subFolders",
+  "git.repositoryScanMaxDepth": 2,
+  "python.defaultInterpreterPath": "/usr/bin/python3"
+}
