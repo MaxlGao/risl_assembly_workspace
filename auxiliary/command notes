@@ -1,0 +1,80 @@
+ROS2 WS
+python -m colcon build
+source ~/risl_assembly_ws/install/setup.bash
+
+DRIVER
+ros2 launch ur_robot_driver ur_control.launch.py \
+  ur_type:=ur5e \
+  robot_ip:=192.168.1.111 \
+  use_tool_communication:=true \
+  tool_baud_rate:=1000000 \
+  use_mock_hardware:=false \
+  tool_voltage:=24 \
+  tool_parity:=2 \
+  tool_stop_bits:=1 \
+  tool_rx_idle_chars:=1.5 \
+  tool_tx_idle_chars:=3.5 \
+  launch_rviz:=false
+  
+GRIPPER
+ros2 run onrobot_ros gripper_control
+ros2 topic pub --once /gripper_command std_msgs/String "{data: 'close'}"
+ros2 topic pub --once /gripper_command std_msgs/String "{data: 'open'}"
+
+VISION
+ros2 run risl_camera_localizer localize --camera-id 8 --suppress-prints --no-pushers --recommend-push pso
+
+ros2 run risl_camera_localizer localize --camera-id 4 --suppress-prints --no-pushers --recommend-push pso
+
+ALLOCATION
+ros2 run risl_camera_localizer allocate
+
+ros2 topic pub --once /vision/boundary_points std_msgs/Float32MultiArray "{data: [0,0,0,1,1,1,1,0]}"
+ros2 topic pub --once /robot/wrench_desired std_msgs/Float32MultiArray "{data: [3.0,0.0,0.05]}"
+
+ACTION
+cd /home/maxlg/ros2_ws/src/ur_asu/ur_asu/scripts
+python3 push_with_allocation.py
+
+or 
+
+python3 /home/maxlg/ros2_ws/src/ur_asu/ur_asu/scripts/push_with_allocation.py
+
+SENSOR
+ros2 run bota_driver bota_driver_node \
+  --ros-args \
+  -p config_file:=/home/maxlg/ros2_ws/src/bota_socket.json \
+  -p output_rate:=0 \
+  -p bota_ft_sensor_link_name:=bota_ft_sensor
+  
+PLOTJUGGLER
+ros2 run plotjuggler plotjuggler
+
+
+
+
+SETUP
+Plug in UR ethernet and camera USB. Set wired connect to UR (see UR website for wired connection settings)
+
+Allocation top left
+Viz top right
+Driver/Gripper mid right
+Control script bottom
+
+Change target name in control script and allocation node
+Tweak desired wrench in control script if wanted
+colcon build. restart allocation. 
+
+Open viz. Make sure object is recognized. 
+Run control script and cut early (to pre-make topics and validate home position)
+Sixth terminal. ros2 bag record -a
+
+Adjust object of interest. Orientation shouldn't matter.
+Move viz window to cover viz, driver, and gripper outputs. 
+Run control script. Screencapture allocation, control script, and viz window. Should last OtOo 1:15 minutes.
+Interrupt early if object goes out of bounds.
+cancel rosbag and organize. 
+
+
+
+

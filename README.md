@@ -1,4 +1,5 @@
 # RISL Assembly Workspace
+This is a full ROS2 workspace for robotic assembly tasks using the UR5e robotic arm.
 
 Environment: Ubuntu 22.04, ROS 2 Humble.
 
@@ -12,6 +13,7 @@ Current repositories represented:
 - https://github.com/MaxlGao/RISL_camera_msgs
 - https://github.com/MaxlGao/RISL_ur
 - https://github.com/MaxlGao/RISL_camera_localizer
+- https://github.com/MaxlGao/RISL_simulation
 
 To checkout:
 ```
@@ -21,3 +23,6 @@ cd ~/risl_assembly_ws
 mkdir -p src
 vcs import src < risl.lock.repos
 ```
+
+Required:
+`pip install numpy cvxpy matplotlib pandas scipy scikit-learn opencv-python shapely trimesh pyswarms mujoco empy==3.3.4 catkin_pkg lark`
