@@ -1,5 +1,10 @@
 # Component repos independent
-/src/
+/src/risl_camera_localizer/
+/src/risl_camera_msgs/
+/src/risl_onrobot_ros/
+/src/risl_simulation/
+/src/risl_ur/
+/src/risl_vention_ros/
 
 # ROS files
 /build/
@@ -9,3 +14,5 @@
 # Python
 __pycache__/
 *.py[cod]
+.venv/
+.vscode/

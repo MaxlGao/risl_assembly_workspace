@@ -1,6 +1,11 @@
+DO IT ALL
+./scripts/start_cell.sh start_allocation:=true
+
 ROS2 WS
-python -m colcon build
+cd ~/risl_assembly_ws
+source .venv/bin/activate
 source ~/risl_assembly_ws/install/setup.bash
+python3 -m colcon build
 
 DRIVER
 ros2 launch ur_robot_driver ur_control.launch.py \
@@ -17,14 +22,14 @@ ros2 launch ur_robot_driver ur_control.launch.py \
   launch_rviz:=false
   
 GRIPPER
-ros2 run onrobot_ros gripper_control
+ros2 run risl_onrobot_ros gripper_control
 ros2 topic pub --once /gripper_command std_msgs/String "{data: 'close'}"
 ros2 topic pub --once /gripper_command std_msgs/String "{data: 'open'}"
 
 VISION
-ros2 run risl_camera_localizer localize --camera-id 8 --suppress-prints --no-pushers --recommend-push pso
-
-ros2 run risl_camera_localizer localize --camera-id 4 --suppress-prints --no-pushers --recommend-push pso
+ros2 run risl_camera_localizer localize --suppress-prints
+ros2 run risl_camera_localizer localize --camera-id 8 --suppress-prints --recommend-push pso
+ros2 run risl_camera_localizer localize --camera-id 4 --suppress-prints --recommend-push pso
 
 ALLOCATION
 ros2 run risl_camera_localizer allocate
@@ -33,12 +38,12 @@ ros2 topic pub --once /vision/boundary_points std_msgs/Float32MultiArray "{data:
 ros2 topic pub --once /robot/wrench_desired std_msgs/Float32MultiArray "{data: [3.0,0.0,0.05]}"
 
 ACTION
-cd /home/maxlg/ros2_ws/src/ur_asu/ur_asu/scripts
+cd /home/maxlg/risl_assembly_ws/src/risl_ur/risl_ur/scripts
 python3 push_with_allocation.py
 
 or 
 
-python3 /home/maxlg/ros2_ws/src/ur_asu/ur_asu/scripts/push_with_allocation.py
+python3 /home/maxlg/risl_assembly_ws/src/risl_ur/risl_ur/scripts/push_with_allocation.py
 
 SENSOR
 ros2 run bota_driver bota_driver_node \
